@@ -8,9 +8,9 @@ module BadgeLabelHelper
   end
 
   private
-  def badge_label(what, value, type = nil)
+  def badge_label(what, value, *types)
     klass = [what]
-    klass << "#{what}-#{type}" if type.present?
-    content_tag :span, value, :class => "#{klass.join(' ')}"
+    klass += types.map { |type| "#{what}-#{type.to_s.gsub('_','-')}" }
+    content_tag :span, value, :class => klass
   end
 end

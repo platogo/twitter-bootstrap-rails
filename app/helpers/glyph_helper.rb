@@ -7,11 +7,10 @@ module GlyphHelper
   # glyph(:thumbs_up, :pull_left)
   # # => <i class="icon-thumbs-up pull-left"></i>
 
-  def glyph(*names)
-    names.map! { |name| name.to_s.gsub('_','-') }
-    names.map! do |name|
-      name =~ /pull-(?:left|right)/ ? name : "icon-#{name}"
-    end
-    content_tag :i, nil, :class => names
+  def glyph(name, *clazzes)
+    klass = [ "icon-#{name.to_s.gsub('_','-')}" ]
+    clazzes.map! { |name| name.to_s.gsub('_','-') }
+    klass += clazzes
+    content_tag :i, nil, :class => klass
   end
 end
