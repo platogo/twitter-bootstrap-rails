@@ -10,7 +10,9 @@ module BadgeLabelHelper
   private
   def badge_label(what, value, *types)
     klass = [what]
-    klass += types.map { |type| "#{what}-#{type.to_s.gsub('_','-')}" }
+    klass += types.map! do |type|
+      type =~ /arrowed_*/ ? type.to_s.gsub('_','-') : "#{what}-#{type.to_s.gsub('_','-')}"
+    end
     content_tag :span, value, :class => klass
   end
 end
