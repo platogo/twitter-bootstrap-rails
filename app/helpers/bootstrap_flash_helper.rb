@@ -7,6 +7,7 @@ module BootstrapFlashHelper
       # Skip empty messages, e.g. for devise messages set to nothing in a locale file.
       next if message.blank?
       
+      type = type.to_sym
       type = :success if type == :notice
       type = :error   if type == :alert
       next unless ALERT_TYPES.include?(type)
